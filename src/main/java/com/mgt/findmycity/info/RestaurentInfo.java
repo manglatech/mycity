@@ -8,7 +8,7 @@ import com.mgt.findmycity.info.base.BaseInfo;
 @XmlRootElement
 public class RestaurentInfo extends BaseInfo{
 	
-	Restaurent restaurent;
+	private Restaurent restaurent;
 	
 	public RestaurentInfo() {
 		super();
@@ -39,4 +39,11 @@ public class RestaurentInfo extends BaseInfo{
 	public void setName(String name) {
 		restaurent.setName(name);
 	}
+	/*public Restaurent getRestaurent() {
+		return restaurent;
+	}
+	public void setRestaurent(Restaurent restaurent) {
+		this.restaurent = restaurent;
+	}*/
+	
 }

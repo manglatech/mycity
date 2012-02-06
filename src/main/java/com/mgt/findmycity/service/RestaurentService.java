@@ -8,6 +8,7 @@ public interface RestaurentService {
 
 	RestaurentInfo getRestaurent(Integer Id);
 	void save(RestaurentInfo restaurent);
+	void delete(RestaurentInfo restaurent);
 	Collection<RestaurentInfo> getRestaurents();
 
 }

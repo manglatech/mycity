@@ -37,6 +37,7 @@ public class RestaurentSrvc {
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getAll")
 	public Collection<RestaurentInfo> getRestaurents(){
 		Collection<RestaurentInfo> restaurent = restaurentService.getRestaurents();
 		return restaurent;

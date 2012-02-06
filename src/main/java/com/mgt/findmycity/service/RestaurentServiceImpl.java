@@ -1,56 +1,48 @@
 package com.mgt.findmycity.service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
+import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mgt.findmycity.dao.RestaurentDAO;
 import com.mgt.findmycity.domain.Restaurent;
 import com.mgt.findmycity.info.RestaurentInfo;
 
 public class RestaurentServiceImpl implements RestaurentService {
 	
-	private EntityManager em;
-	@PersistenceContext
-	public void setEntityManager(EntityManager entityManager) {
-		this.em = entityManager;
+	private RestaurentDAO dao;
+	@Autowired
+	public void setEntityManager(RestaurentDAO dao) {
+		this.dao = dao;
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public RestaurentInfo getRestaurent(Integer Id){
-		Restaurent restaurent = em.find(Restaurent.class, Id);
+		Restaurent restaurent = dao.findById(Id);
 		return getRestaurentInfo(restaurent);
 	}
-
 	@Override
-	@Transactional
 	public void save(RestaurentInfo r_info) {
-		Restaurent restaurent = getRestaurentObject(r_info);
-	    if (!em.contains(restaurent)) {
-	        em.persist(restaurent);
-	        em.flush();
-	    }
+		Restaurent restaurent = new Restaurent(); 
+		try {
+			BeanUtils.copyProperties(restaurent, r_info);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		dao.doPersistent(restaurent);
 	}
-
+	
 	@Override
 	public Collection<RestaurentInfo> getRestaurents() {
 		return null;
 		//Query query = em.createNamedQuery("getRestaurents",Restaurent.class);
 	    //return getRestaurents((Collection<Restaurent>) query.getResultList());
 	}
-	
-	private Restaurent getRestaurentObject(RestaurentInfo info) {
-		Restaurent restaurent = new Restaurent();
-		restaurent.setRestaurentId(2);
-		restaurent.setCode(info.getCode());
-		restaurent.setName(info.getName());
-		return restaurent;
-	}
-	
 	private RestaurentInfo getRestaurentInfo(Restaurent restaurent) {
 		return new RestaurentInfo(restaurent);
 	}
@@ -61,6 +53,17 @@ public class RestaurentServiceImpl implements RestaurentService {
 			infos.add(new RestaurentInfo(rest));
 		}
 		return infos;
+	}
+
+	@Override
+	public void delete(RestaurentInfo r_info) {
+		Restaurent restaurent = new Restaurent();
+		try {
+			BeanUtils.copyProperties(restaurent, r_info);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		dao.doRemove(restaurent);
 	}
 	
 }

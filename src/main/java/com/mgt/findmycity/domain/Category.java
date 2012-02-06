@@ -1,5 +1,5 @@
 package com.mgt.findmycity.domain;
-// Generated Feb 1, 2012 11:09:16 AM by Hibernate Tools 3.1.0.beta4
+// Generated Feb 3, 2012 2:32:33 PM by Hibernate Tools 3.1.0.beta4
 
 import java.util.HashSet;
 import java.util.Set;

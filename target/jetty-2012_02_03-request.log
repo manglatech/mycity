@@ -1,0 +1,4 @@
+127.0.0.1 -  -  [03/Feb/2012:19:33:26 +0000] "GET /mycity/Restaurent/get/4 HTTP/1.1" 200 50 
+127.0.0.1 -  -  [03/Feb/2012:19:33:30 +0000] "GET /mycity/Restaurent/get/4 HTTP/1.1" 200 50 
+127.0.0.1 -  -  [03/Feb/2012:20:39:59 +0000] "GET /mycity/Restaurent/get/4 HTTP/1.1" 200 50 
+127.0.0.1 -  -  [03/Feb/2012:21:20:47 +0000] "GET /mycity/Restaurent/get/4 HTTP/1.1" 200 50 
