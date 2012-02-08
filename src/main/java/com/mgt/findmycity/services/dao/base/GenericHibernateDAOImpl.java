@@ -1,4 +1,4 @@
-package com.mgt.findmycity.dao.base;
+package com.mgt.findmycity.services.dao.base;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -7,16 +7,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.transaction.annotation.Transactional;
-
-@Transactional
-public abstract class GenericHibernateDAO<T, ID extends Serializable>
-		implements GenericDAO<T, ID> {
+public abstract class GenericHibernateDAOImpl<T, ID extends Serializable>
+		implements GenericDAO<T, ID>, GenericHibernateDao<T, ID> {
 
 	private Class<T> persistentClass;
 	
 	private EntityManager em;
 	
+	@Override
 	@PersistenceContext
 	public void setEntityManager(EntityManager entityManager) {
 		this.em = entityManager;
@@ -27,34 +25,40 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
 					"Entity Manager has not been set on DAO before usage");
 		return em;
 	}
-	public GenericHibernateDAO() {
+	@SuppressWarnings("unchecked")
+	public GenericHibernateDAOImpl() {
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 	}
+	@Override
 	public Class<T> getPersistentClass() {
 		return persistentClass;
 	}
+	@Override
 	public T findById(ID id) {
 		T entity;
 		entity = (T) getManager().find(getPersistentClass(), id);
 		getManager().clear();
 		return entity;
 	}
+	@SuppressWarnings("unchecked")
+	@Override
 	public List<T> findAll() {
 		return getManager().createQuery( "from " + getPersistentClass().getName())
 			       .getResultList();
 	}
-	
+	@Override
 	public T doPersistent(T entity) {
 		getManager().persist(entity);
 		getManager().flush();
 		return entity;
 	}
+	@Override
 	public void doRemove(T entity) {
 		getManager().remove(entity);
 	}
+	@Override
 	public void clear() {
 		getManager().clear();
 	}
-
 }

@@ -1,4 +1,4 @@
-package com.mgt.findmycity.service;
+package com.mgt.findmycity.services.spring;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,18 +6,21 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mgt.findmycity.dao.RestaurentDAO;
 import com.mgt.findmycity.domain.Restaurent;
 import com.mgt.findmycity.info.RestaurentInfo;
+import com.mgt.findmycity.services.dao.RestaurentDAOImpl;
 
+@Service
+@Transactional
 public class RestaurentServiceImpl implements RestaurentService {
 	
-	private RestaurentDAO dao;
+	private RestaurentDAOImpl dao;
 	
 	@Autowired
-	public void setDao(RestaurentDAO dao) {
+	public void setDao(RestaurentDAOImpl dao) {
 		this.dao = dao;
 	}
 	

@@ -18,7 +18,7 @@ public class RestaurentInfo extends BaseInfo{
 		if(restaurent != null){
 			this.restaurent = restaurent;
 		}else{
-			
+			this.restaurent = new Restaurent();
 		}
 	}
 	public Integer getId() {
@@ -39,11 +39,4 @@ public class RestaurentInfo extends BaseInfo{
 	public void setName(String name) {
 		restaurent.setName(name);
 	}
-	/*public Restaurent getRestaurent() {
-		return restaurent;
-	}
-	public void setRestaurent(Restaurent restaurent) {
-		this.restaurent = restaurent;
-	}*/
-	
 }
