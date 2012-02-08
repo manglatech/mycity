@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.mgt.findmycity.info.RestaurentInfo;
+import com.mgt.findmycity.domain.Restaurent;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "/applicationContext.xml" })
@@ -24,10 +24,22 @@ public class RestaurentServiceTest{
 	@Test
 	public void insertRestaurent() {
 		try {
-			RestaurentInfo entity = new RestaurentInfo();
+			Restaurent entity = new Restaurent();
 			entity.setCode("TEST");
 			entity.setName("TEST");
 			service.save(entity);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void getRestaurentById() {
+		try {
+			Restaurent entity = service.getRestaurent(4);
+			Assert.assertNotNull(entity);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			e.printStackTrace();

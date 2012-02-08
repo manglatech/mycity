@@ -3,6 +3,7 @@ package com.mgt.findmycity.domain;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +11,25 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
+/*@NamedQueries({
+	@NamedQuery(
+	name = "findByCategoryId",
+	query = "select r from Restaurent r " +
+                "inner join RestaurentCategory rc " +
+                "inner join Category c " +
+                "where c.name =:category"
+	)
+})*/
+@XmlRootElement
 @Table(name = "restaurent", catalog = "findmycity", uniqueConstraints = {})
 public class Restaurent implements java.io.Serializable {
 
@@ -64,6 +80,7 @@ public class Restaurent implements java.io.Serializable {
 	}
 	@ManyToOne(cascade = {}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "PHOTO_ID", unique = false, nullable = true, insertable = true, updatable = true)
+	@XmlTransient
 	public Photo getPhoto() {
 		return this.photo;
 	}
@@ -140,10 +157,11 @@ public class Restaurent implements java.io.Serializable {
 		this.modifiedDate = modifiedDate;
 	}
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "restaurent")
+	@XmlTransient
 	public Set<RestaurentCategory> getRestaurentCategories() {
 		return this.restaurentCategories;
 	}
-
+	
 	public void setRestaurentCategories(
 			Set<RestaurentCategory> restaurentCategories) {
 		this.restaurentCategories = restaurentCategories;

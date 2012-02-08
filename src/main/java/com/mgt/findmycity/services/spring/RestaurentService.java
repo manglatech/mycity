@@ -1,14 +1,16 @@
 package com.mgt.findmycity.services.spring;
 
 import java.util.Collection;
+import java.util.List;
 
-import com.mgt.findmycity.info.RestaurentInfo;
+import com.mgt.findmycity.domain.Restaurent;
 
 public interface RestaurentService {
 
-	RestaurentInfo getRestaurent(Integer Id);
-	void save(RestaurentInfo restaurent);
-	void delete(RestaurentInfo restaurent);
-	Collection<RestaurentInfo> getRestaurents();
+	Restaurent getRestaurent(Integer Id);
+	Restaurent save(Restaurent info);
+	boolean delete(Restaurent restaurent);
+	Collection<Restaurent> getRestaurents();
+	List<Restaurent> findByCategory(String category);
 
 }

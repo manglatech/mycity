@@ -11,7 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.mgt.findmycity.info.RestaurentInfo;
+import com.mgt.findmycity.domain.Restaurent;
 import com.mgt.findmycity.services.spring.RestaurentService;
 import com.sun.jersey.spi.inject.Inject;
 
@@ -24,8 +24,8 @@ public class RestaurentSrvc {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/get/{id}")
-	public RestaurentInfo getRestaurent(@PathParam("id") Integer Id) {
-		RestaurentInfo restaurent = restaurentService.getRestaurent(Id);
+	public Restaurent getRestaurent(@PathParam("id") Integer Id) {
+		Restaurent restaurent = restaurentService.getRestaurent(Id);
 		return restaurent;
 	}
 
@@ -40,8 +40,8 @@ public class RestaurentSrvc {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getAll")
-	public Collection<RestaurentInfo> getRestaurents() {
-		Collection<RestaurentInfo> restaurent = restaurentService
+	public Collection<Restaurent> getRestaurents() {
+		Collection<Restaurent> restaurent = restaurentService
 				.getRestaurents();
 		return restaurent;
 	}
@@ -50,7 +50,7 @@ public class RestaurentSrvc {
 	@Path("/Add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public RestaurentInfo createRestaurent(RestaurentInfo info) {
+	public Restaurent createRestaurent(Restaurent info) {
 		restaurentService.save(info);
 		return info;
 	}
