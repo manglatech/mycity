@@ -38,7 +38,6 @@ public abstract class GenericHibernateDAOImpl<T, ID extends Serializable>
 	public T findById(ID id) {
 		T entity;
 		entity = (T) getManager().find(getPersistentClass(), id);
-		getManager().clear();
 		return entity;
 	}
 	@SuppressWarnings("unchecked")
@@ -56,9 +55,5 @@ public abstract class GenericHibernateDAOImpl<T, ID extends Serializable>
 	@Override
 	public void doRemove(T entity) {
 		getManager().remove(entity);
-	}
-	@Override
-	public void clear() {
-		getManager().clear();
 	}
 }

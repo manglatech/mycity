@@ -11,11 +11,10 @@
 			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 	<context:component-scan base-package="com.mgt.findmycity.services"/>
-
+	<tx:annotation-driven/>
+	
 	<!-- enables @PersistenceUnit/@PersistenceContext annotations -->
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
-
-	<tx:annotation-driven />
 	<context:annotation-config />
 	
 	<bean id="dataSource"
@@ -38,4 +37,9 @@
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"
 		p:database="MYSQL" p:showSql="true" />
 		
+	<!-- <bean id="openEntityManagerInViewInterceptor" class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">
+		<property name="entityManagerFactory">
+			<ref bean="entityManagerFactory" />
+		</property>
+	</bean>	 -->
 </beans>

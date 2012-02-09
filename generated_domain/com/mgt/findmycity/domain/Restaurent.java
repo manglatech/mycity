@@ -1,7 +1,6 @@
 package com.mgt.findmycity.domain;
-// Generated Feb 8, 2012 12:31:46 PM by Hibernate Tools 3.1.0.beta4
+// Generated Feb 9, 2012 4:32:50 PM by Hibernate Tools 3.1.0.beta4
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -35,11 +34,9 @@ public class Restaurent  implements java.io.Serializable {
      private String name;
      private String description;
      private String isActive;
-     private Date createdDate;
-     private String createdBy;
-     private Date modifiedBy;
-     private String modifiedDate;
+     private String deliveryFlag;
      private Set<RestaurentCategory> restaurentCategories = new HashSet<RestaurentCategory>(0);
+     private Set<Delivery> deliveries = new HashSet<Delivery>(0);
 
 
     // Constructors
@@ -56,18 +53,16 @@ public class Restaurent  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public Restaurent(int restaurentId, Photo photo, String code, String name, String description, String isActive, Date createdDate, String createdBy, Date modifiedBy, String modifiedDate, Set<RestaurentCategory> restaurentCategories) {
+    public Restaurent(int restaurentId, Photo photo, String code, String name, String description, String isActive, String deliveryFlag, Set<RestaurentCategory> restaurentCategories, Set<Delivery> deliveries) {
         this.restaurentId = restaurentId;
         this.photo = photo;
         this.code = code;
         this.name = name;
         this.description = description;
         this.isActive = isActive;
-        this.createdDate = createdDate;
-        this.createdBy = createdBy;
-        this.modifiedBy = modifiedBy;
-        this.modifiedDate = modifiedDate;
+        this.deliveryFlag = deliveryFlag;
         this.restaurentCategories = restaurentCategories;
+        this.deliveries = deliveries;
     }
     
 
@@ -131,41 +126,14 @@ public class Restaurent  implements java.io.Serializable {
     public void setIsActive(String isActive) {
         this.isActive = isActive;
     }
-    @Column(name="CREATED_DATE", unique=false, nullable=true, insertable=true, updatable=true, length=19)
+    @Column(name="DELIVERY_FLAG", unique=false, nullable=true, insertable=true, updatable=true, length=1)
 
-    public Date getCreatedDate() {
-        return this.createdDate;
+    public String getDeliveryFlag() {
+        return this.deliveryFlag;
     }
     
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-    @Column(name="CREATED_BY", unique=false, nullable=true, insertable=true, updatable=true, length=26)
-
-    public String getCreatedBy() {
-        return this.createdBy;
-    }
-    
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-    @Column(name="MODIFIED_BY", unique=false, nullable=true, insertable=true, updatable=true, length=19)
-
-    public Date getModifiedBy() {
-        return this.modifiedBy;
-    }
-    
-    public void setModifiedBy(Date modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
-    @Column(name="MODIFIED_DATE", unique=false, nullable=true, insertable=true, updatable=true, length=26)
-
-    public String getModifiedDate() {
-        return this.modifiedDate;
-    }
-    
-    public void setModifiedDate(String modifiedDate) {
-        this.modifiedDate = modifiedDate;
+    public void setDeliveryFlag(String deliveryFlag) {
+        this.deliveryFlag = deliveryFlag;
     }
     @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="restaurent")
 
@@ -175,6 +143,15 @@ public class Restaurent  implements java.io.Serializable {
     
     public void setRestaurentCategories(Set<RestaurentCategory> restaurentCategories) {
         this.restaurentCategories = restaurentCategories;
+    }
+    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="restaurent")
+
+    public Set<Delivery> getDeliveries() {
+        return this.deliveries;
+    }
+    
+    public void setDeliveries(Set<Delivery> deliveries) {
+        this.deliveries = deliveries;
     }
    
 

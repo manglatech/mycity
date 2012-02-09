@@ -1,1 +1,1 @@
-{"requestUrl":"http://localhost:8080/mycity/Restaurent/Add","requestMethod":"PUT","requestBody":"{\"code\":\"MREST\",\"name\":\"MANGLA RESTAURENT\"}","headers":["content-type","application/json"]}
+{"category":{"categoryId":"1","desc":"Fast Food Restaurent. Choice for busy people.","name":"FAST FOOD"},"code":"Manglatech","description":"New One","isActive":"Y","name":"Tech"}

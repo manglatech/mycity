@@ -9,7 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
+@XmlRootElement
 @Entity
 @Table(name = "category", catalog = "findmycity", uniqueConstraints = {})
 public class Category implements java.io.Serializable {
@@ -20,8 +23,6 @@ public class Category implements java.io.Serializable {
 	private String desc;
 	private Set<RestaurentCategory> restaurentCategories = new HashSet<RestaurentCategory>(
 			0);
-
-	// Constructors
 
 	/** default constructor */
 	public Category() {
@@ -71,6 +72,7 @@ public class Category implements java.io.Serializable {
 		this.desc = desc;
 	}
 
+	@XmlTransient
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "category")
 	public Set<RestaurentCategory> getRestaurentCategories() {
 		return this.restaurentCategories;

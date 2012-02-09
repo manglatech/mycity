@@ -9,7 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
+@XmlRootElement
 @Entity
 @Table(name = "photo", catalog = "findmycity", uniqueConstraints = {})
 public class Photo implements java.io.Serializable {
@@ -21,19 +24,14 @@ public class Photo implements java.io.Serializable {
 	private String location;
 	private Set<Restaurent> restaurents = new HashSet<Restaurent>(0);
 
-	// Constructors
-
-	/** default constructor */
 	public Photo() {
 	}
 
-	/** minimal constructor */
 	public Photo(int id, String location) {
 		this.id = id;
 		this.location = location;
 	}
-
-	/** full constructor */
+	
 	public Photo(int id, String name, String desc, String location,
 			Set<Restaurent> restaurents) {
 		this.id = id;
@@ -43,7 +41,6 @@ public class Photo implements java.io.Serializable {
 		this.restaurents = restaurents;
 	}
 
-	// Property accessors
 	@Id
 	@Column(name = "ID", unique = true, nullable = false, insertable = true, updatable = true)
 	public int getId() {
@@ -82,6 +79,7 @@ public class Photo implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "photo")
+	@XmlTransient
 	public Set<Restaurent> getRestaurents() {
 		return this.restaurents;
 	}

@@ -19,6 +19,5 @@ public interface GenericHibernateDao<T, ID extends Serializable> {
 
 	public abstract void doRemove(T entity);
 
-	public abstract void clear();
 
 }

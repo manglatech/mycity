@@ -24,7 +24,7 @@ public class RestaurentDAOTest{
 	public void setRestaurentService(RestaurentDAO<Restaurent, Integer> dao) {
 		this.dao = dao;
 	}
-	@Test
+	//@Test
 	public void insertRestaurent() {
 		try {
 			Restaurent entity = new Restaurent();
