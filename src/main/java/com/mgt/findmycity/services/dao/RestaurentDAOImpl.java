@@ -24,6 +24,7 @@ public class RestaurentDAOImpl extends GenericHibernateDAOImpl<Restaurent, Integ
 		}
 		return result.get(0);
 	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Restaurent> findByCategory(String category) {
 		Query query = getManager().createNamedQuery(RestaurentContants.FIND_BY_CATEGORY);

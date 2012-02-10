@@ -1,0 +1,1 @@
+{"category":{"categoryId":"1","desc":"Fast Food Restaurent. Choice for busy people.","name":"FAST FOOD"},"code":"Manglatech","description":"New One","isActive":"Y","name":"Tech"}

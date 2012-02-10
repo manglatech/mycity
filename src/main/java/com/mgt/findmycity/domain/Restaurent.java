@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -23,13 +25,11 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.mgt.findmycity.domain.base.BaseVO;
 
 @Entity
-/*
- * @NamedQueries({
- * 
- * @NamedQuery( name = "findByCategoryId", query = "select r from Restaurent r "
- * + "inner join RestaurentCategory rc " + "inner join Category c " +
- * "where c.name =:category" ) })
- */
+@NamedQueries({
+@NamedQuery( name = "findByCategory", query = "select r from Restaurent as r "
++ "inner join r.restaurentCategories as rc " + "inner join rc.category as c " +
+"where c.name=:name " ) })
+
 @XmlRootElement
 @Table(name = "restaurent", catalog = "findmycity", uniqueConstraints = {})
 public class Restaurent extends BaseVO implements java.io.Serializable {
@@ -161,5 +161,16 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 	public void setDeliveryFlag(String deliveryFlag) {
 		this.deliveryFlag = deliveryFlag;
 	}
+	
+	private Set<MenuItem> menuItems = new HashSet<MenuItem>(0);
+	@XmlTransient
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="restaurent")
+    public Set<MenuItem> getMenuItems() {
+        return this.menuItems;
+    }
+    
+    public void setMenuItems(Set<MenuItem> menuItems) {
+        this.menuItems = menuItems;
+    }
 
 }

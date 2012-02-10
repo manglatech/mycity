@@ -1,9 +1,5 @@
 package com.mgt.findmycity.domain.base;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.xml.bind.annotation.XmlTransient;
 
 public class BaseVO {
 	

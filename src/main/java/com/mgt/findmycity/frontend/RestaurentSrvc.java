@@ -33,8 +33,9 @@ public class RestaurentSrvc {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/delete/{id}")
 	public void deleteRestaurent(@PathParam("id") Integer Id) {
-		// Restaurent restaurent = restaurentService.getRestaurent(Id);
-		// return getRestaurentInfo(restaurent);
+		Restaurent entity = new Restaurent();
+		entity.setRestaurentId(Id);
+		restaurentService.delete(entity);
 	}
 
 	@GET
@@ -53,5 +54,13 @@ public class RestaurentSrvc {
 	public Restaurent createRestaurent(Restaurent info) {
 		restaurentService.save(info);
 		return info;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/search/category/{name}")
+	public Collection<Restaurent> getRestaurentsByCategory(@PathParam("name") String category) {
+		Collection<Restaurent> restaurents = restaurentService.findByCategory(category);
+		return restaurents;
 	}
 }

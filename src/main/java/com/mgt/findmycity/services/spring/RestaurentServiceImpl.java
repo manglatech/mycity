@@ -48,6 +48,6 @@ public class RestaurentServiceImpl implements RestaurentService {
 	@Override
 	public List<Restaurent> findByCategory(String category) {
 		List<Restaurent> list = dao.findByCategory(category);
-		return null;
+		return list;
 	}
 }

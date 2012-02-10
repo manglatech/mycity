@@ -20,22 +20,19 @@ public class SearchRestaurentServiceTest{
 
 	private RestaurentService service;
 	private static final String INVALID_CATEGORY = "NO_CATEGORY";
-	private static final String VALID_CATEGORY = "Indian Cusine";
+	private static final String VALID_CATEGORY = "FAST FOOD";
 	
-
 	@Autowired
 	public void setRestaurentService(RestaurentService service) {
 		this.service = service;
 	}
 	@Before
 	public void setUp(){
-		Restaurent entity = new Restaurent();
 	}
 	@After
 	public void tearDown(){
-		
 	}
-	//@Test
+	@Test
 	public void findByCategory() {
 		try {
 			List<Restaurent> result = service.findByCategory(INVALID_CATEGORY);

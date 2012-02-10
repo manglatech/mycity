@@ -1,5 +1,5 @@
 package com.mgt.findmycity.domain;
-// Generated Feb 9, 2012 4:32:50 PM by Hibernate Tools 3.1.0.beta4
+// Generated Feb 10, 2012 3:23:57 PM by Hibernate Tools 3.1.0.beta4
 
 import java.util.HashSet;
 import java.util.Set;
@@ -37,6 +37,7 @@ public class Restaurent  implements java.io.Serializable {
      private String deliveryFlag;
      private Set<RestaurentCategory> restaurentCategories = new HashSet<RestaurentCategory>(0);
      private Set<Delivery> deliveries = new HashSet<Delivery>(0);
+     private Set<MenuItem> menuItems = new HashSet<MenuItem>(0);
 
 
     // Constructors
@@ -53,7 +54,7 @@ public class Restaurent  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public Restaurent(int restaurentId, Photo photo, String code, String name, String description, String isActive, String deliveryFlag, Set<RestaurentCategory> restaurentCategories, Set<Delivery> deliveries) {
+    public Restaurent(int restaurentId, Photo photo, String code, String name, String description, String isActive, String deliveryFlag, Set<RestaurentCategory> restaurentCategories, Set<Delivery> deliveries, Set<MenuItem> menuItems) {
         this.restaurentId = restaurentId;
         this.photo = photo;
         this.code = code;
@@ -63,6 +64,7 @@ public class Restaurent  implements java.io.Serializable {
         this.deliveryFlag = deliveryFlag;
         this.restaurentCategories = restaurentCategories;
         this.deliveries = deliveries;
+        this.menuItems = menuItems;
     }
     
 
@@ -152,6 +154,15 @@ public class Restaurent  implements java.io.Serializable {
     
     public void setDeliveries(Set<Delivery> deliveries) {
         this.deliveries = deliveries;
+    }
+    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="restaurent")
+
+    public Set<MenuItem> getMenuItems() {
+        return this.menuItems;
+    }
+    
+    public void setMenuItems(Set<MenuItem> menuItems) {
+        this.menuItems = menuItems;
     }
    
 
