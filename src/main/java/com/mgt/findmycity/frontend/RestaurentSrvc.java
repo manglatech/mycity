@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.mgt.findmycity.domain.Restaurent;
+import com.mgt.findmycity.domain.RestaurentMenu;
 import com.mgt.findmycity.services.spring.RestaurentService;
 import com.sun.jersey.spi.inject.Inject;
 
@@ -34,7 +35,7 @@ public class RestaurentSrvc {
 	@Path("/delete/{id}")
 	public void deleteRestaurent(@PathParam("id") Integer Id) {
 		Restaurent entity = new Restaurent();
-		entity.setRestaurentId(Id);
+		entity.setId(Id);
 		restaurentService.delete(entity);
 	}
 
@@ -63,4 +64,12 @@ public class RestaurentSrvc {
 		Collection<Restaurent> restaurents = restaurentService.findByCategory(category);
 		return restaurents;
 	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/menu/get/{id}")
+	public Collection<RestaurentMenu> getRestaurentMenu(@PathParam("id") Integer restaurentId) {
+		Collection<RestaurentMenu> restaurents = restaurentService.getRestaurentMenu(restaurentId);
+		return restaurents;
+	}
+	
 }

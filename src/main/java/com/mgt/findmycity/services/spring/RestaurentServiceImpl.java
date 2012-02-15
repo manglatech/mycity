@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mgt.findmycity.domain.Restaurent;
+import com.mgt.findmycity.domain.RestaurentMenu;
 import com.mgt.findmycity.services.dao.RestaurentDAO;
 
 @Service
@@ -23,13 +24,16 @@ public class RestaurentServiceImpl implements RestaurentService {
 	@Override
 	public Restaurent getRestaurent(Integer Id){
 		Restaurent restaurent = dao.findById(Id);
+		if(restaurent != null){
+			
+		}
 		return restaurent;
 	}
 	@Override
 	public Restaurent save(Restaurent restaurent) {
 		try {
 			Restaurent result = dao.doPersistent(restaurent);
-			return getRestaurent(result.getRestaurentId());
+			return getRestaurent(result.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -49,5 +53,9 @@ public class RestaurentServiceImpl implements RestaurentService {
 	public List<Restaurent> findByCategory(String category) {
 		List<Restaurent> list = dao.findByCategory(category);
 		return list;
+	}
+	@Override
+	public List<RestaurentMenu> getRestaurentMenu(int i) {
+		return dao.getRestaurentMenu(i);
 	}
 }

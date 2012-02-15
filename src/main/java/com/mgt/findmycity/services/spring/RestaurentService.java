@@ -3,9 +3,8 @@ package com.mgt.findmycity.services.spring;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.mgt.findmycity.domain.Restaurent;
+import com.mgt.findmycity.domain.RestaurentMenu;
 
 public interface RestaurentService {
 
@@ -14,5 +13,6 @@ public interface RestaurentService {
 	boolean delete(Restaurent restaurent);
 	Collection<Restaurent> getRestaurents();
 	List<Restaurent> findByCategory(String category);
+	List<RestaurentMenu> getRestaurentMenu(int i);
 
 }

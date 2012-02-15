@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name = "restaurent_category", catalog = "findmycity")
@@ -37,6 +38,7 @@ public class RestaurentCategory implements java.io.Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "restaurentId", column = @Column(name = "RESTAURENT_ID", unique = false, nullable = false, insertable = true, updatable = true)),
 			@AttributeOverride(name = "categoryId", column = @Column(name = "CATEGORY_ID", unique = false, nullable = false, insertable = true, updatable = true)) })
+	@XmlTransient
 	public RestaurentCategoryId getId() {
 		return this.id;
 	}
@@ -57,6 +59,7 @@ public class RestaurentCategory implements java.io.Serializable {
 
 	@ManyToOne(cascade = {}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "RESTAURENT_ID", unique = false, nullable = false, insertable = false, updatable = false)
+	@XmlTransient
 	public Restaurent getRestaurent() {
 		return this.restaurent;
 	}

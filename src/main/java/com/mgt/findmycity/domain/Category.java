@@ -9,49 +9,50 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-@XmlRootElement
 @Entity
 @Table(name = "category", catalog = "findmycity", uniqueConstraints = {})
 public class Category implements java.io.Serializable {
 
-	private static final long serialVersionUID = -5218071025714432254L;
-	private int categoryId;
+	private static final long serialVersionUID = 804707482716808096L;
+	private int id;
 	private String name;
 	private String desc;
 	private Set<RestaurentCategory> restaurentCategories = new HashSet<RestaurentCategory>(
 			0);
+
+	// Constructors
 
 	/** default constructor */
 	public Category() {
 	}
 
 	/** minimal constructor */
-	public Category(int categoryId, String name, String desc) {
-		this.categoryId = categoryId;
+	public Category(int id, String name, String desc) {
+		this.id = id;
 		this.name = name;
 		this.desc = desc;
 	}
 
 	/** full constructor */
-	public Category(int categoryId, String name, String desc,
+	public Category(int id, String name, String desc,
 			Set<RestaurentCategory> restaurentCategories) {
-		this.categoryId = categoryId;
+		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.restaurentCategories = restaurentCategories;
 	}
 
+	// Property accessors
 	@Id
-	@Column(name = "CATEGORY_ID", unique = true, nullable = false, insertable = true, updatable = true)
-	public int getCategoryId() {
-		return this.categoryId;
+	@Column(name = "ID", unique = true, nullable = false, insertable = true, updatable = true)
+	public int getId() {
+		return this.id;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Column(name = "NAME", unique = false, nullable = false, insertable = true, updatable = true, length = 45)
@@ -72,8 +73,8 @@ public class Category implements java.io.Serializable {
 		this.desc = desc;
 	}
 
-	@XmlTransient
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "category")
+	@XmlTransient
 	public Set<RestaurentCategory> getRestaurentCategories() {
 		return this.restaurentCategories;
 	}

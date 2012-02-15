@@ -9,33 +9,30 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mgt.findmycity.domain.Restaurent;
+import com.mgt.findmycity.domain.Comments;
+import com.mgt.findmycity.info.CommentsSummary;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 @ContextConfiguration({ "/applicationContext.xml" })
-public class RestaurentDAOTest{
+public class CommentsDAOTest{
 
-	private RestaurentDAO<Restaurent, Integer> dao;
+	private CommentsDAO<Comments, Integer> dao;
 	private static final String CODE = "DAOTEST"; 
 	private static final String NAME = "DAOTEST";
 
 	@Autowired
-	public void setRestaurentService(RestaurentDAO<Restaurent, Integer> dao) {
+	public void setCommentsDAO(CommentsDAO<Comments, Integer> dao) {
 		this.dao = dao;
 	}
 	@Test
 	public void insertRestaurent() {
 		try {
-			Restaurent entity = new Restaurent();
-			entity.setCode(CODE);
-			entity.setName(NAME);
-			dao.doPersistent(entity);
-			Restaurent r = (Restaurent) dao.findByCode(CODE);
-			System.out.println(r.getId());
-			Assert.assertNotNull(r);
-			Assert.assertEquals(r.getName(),NAME);
-			Assert.assertTrue(true);
+			CommentsSummary summary = dao.findAverageUserRatings(4, 1);
+			Assert.assertNotNull(summary);
+			Assert.assertEquals(1, summary.getNumberOfComments().intValue());
+			Assert.assertEquals(4, summary.getAverageRatings().intValue());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.assertTrue(false);

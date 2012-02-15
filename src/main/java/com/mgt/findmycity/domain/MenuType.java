@@ -7,40 +7,44 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name = "menu_item", catalog = "findmycity", uniqueConstraints = {})
-public class MenuItem implements java.io.Serializable {
+@Table(name = "menu_type", catalog = "findmycity", uniqueConstraints = {})
+public class MenuType implements java.io.Serializable {
 
-	private static final long serialVersionUID = 2850083519867785050L;
+	private static final long serialVersionUID = -8070688157377966424L;
 	private int id;
+	private MenuServingTime menuServingTime;
 	private String name;
 	private String description;
-	private Set<MenuItemMapping> menuItemMappings = new HashSet<MenuItemMapping>(
-			0);
+	private Set<RestaurentMenu> restaurentMenus = new HashSet<RestaurentMenu>(0);
 
 	// Constructors
 
 	/** default constructor */
-	public MenuItem() {
+	public MenuType() {
 	}
 
 	/** minimal constructor */
-	public MenuItem(int id, String name) {
+	public MenuType(int id, MenuServingTime menuServingTime, String name) {
 		this.id = id;
+		this.menuServingTime = menuServingTime;
 		this.name = name;
 	}
 
 	/** full constructor */
-	public MenuItem(int id, String name, String description,
-			Set<MenuItemMapping> menuItemMappings) {
+	public MenuType(int id, MenuServingTime menuServingTime, String name,
+			String description, Set<RestaurentMenu> restaurentMenus) {
 		this.id = id;
+		this.menuServingTime = menuServingTime;
 		this.name = name;
 		this.description = description;
-		this.menuItemMappings = menuItemMappings;
+		this.restaurentMenus = restaurentMenus;
 	}
 
 	// Property accessors
@@ -52,6 +56,16 @@ public class MenuItem implements java.io.Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@ManyToOne(cascade = {}, fetch = FetchType.LAZY)
+	@JoinColumn(name = "MENU_SERVING_TIME_ID", unique = false, nullable = false, insertable = true, updatable = true)
+	public MenuServingTime getMenuServingTime() {
+		return this.menuServingTime;
+	}
+
+	public void setMenuServingTime(MenuServingTime menuServingTime) {
+		this.menuServingTime = menuServingTime;
 	}
 
 	@Column(name = "NAME", unique = false, nullable = false, insertable = true, updatable = true, length = 45)
@@ -72,14 +86,14 @@ public class MenuItem implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "menuItem")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "menuType")
 	@XmlTransient
-	public Set<MenuItemMapping> getMenuItemMappings() {
-		return this.menuItemMappings;
+	public Set<RestaurentMenu> getRestaurentMenus() {
+		return this.restaurentMenus;
 	}
 
-	public void setMenuItemMappings(Set<MenuItemMapping> menuItemMappings) {
-		this.menuItemMappings = menuItemMappings;
+	public void setRestaurentMenus(Set<RestaurentMenu> restaurentMenus) {
+		this.restaurentMenus = restaurentMenus;
 	}
 
 }

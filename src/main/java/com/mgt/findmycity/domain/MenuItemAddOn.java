@@ -12,35 +12,37 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name = "menu_item", catalog = "findmycity", uniqueConstraints = {})
-public class MenuItem implements java.io.Serializable {
+@Table(name = "menu_item_add_on", catalog = "findmycity", uniqueConstraints = {})
+public class MenuItemAddOn implements java.io.Serializable {
 
-	private static final long serialVersionUID = 2850083519867785050L;
+	// Fields
+
+	private static final long serialVersionUID = 8286106814871040367L;
 	private int id;
 	private String name;
 	private String description;
-	private Set<MenuItemMapping> menuItemMappings = new HashSet<MenuItemMapping>(
+	private Set<MenuItemAddOnMapping> menuItemAddOnMappings = new HashSet<MenuItemAddOnMapping>(
 			0);
 
 	// Constructors
 
 	/** default constructor */
-	public MenuItem() {
+	public MenuItemAddOn() {
 	}
 
 	/** minimal constructor */
-	public MenuItem(int id, String name) {
+	public MenuItemAddOn(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
 	/** full constructor */
-	public MenuItem(int id, String name, String description,
-			Set<MenuItemMapping> menuItemMappings) {
+	public MenuItemAddOn(int id, String name, String description,
+			Set<MenuItemAddOnMapping> menuItemAddOnMappings) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.menuItemMappings = menuItemMappings;
+		this.menuItemAddOnMappings = menuItemAddOnMappings;
 	}
 
 	// Property accessors
@@ -72,14 +74,15 @@ public class MenuItem implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "menuItem")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "menuItemAddOn")
 	@XmlTransient
-	public Set<MenuItemMapping> getMenuItemMappings() {
-		return this.menuItemMappings;
+	public Set<MenuItemAddOnMapping> getMenuItemAddOnMappings() {
+		return this.menuItemAddOnMappings;
 	}
 
-	public void setMenuItemMappings(Set<MenuItemMapping> menuItemMappings) {
-		this.menuItemMappings = menuItemMappings;
+	public void setMenuItemAddOnMappings(
+			Set<MenuItemAddOnMapping> menuItemAddOnMappings) {
+		this.menuItemAddOnMappings = menuItemAddOnMappings;
 	}
 
 }

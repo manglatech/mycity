@@ -1,0 +1,1 @@
+{"requestUrl":"http://localhost:8080/mycity/Restaurent/search/category/FAST FOOD","requestMethod":"GET","requestBody":"","headers":[]}

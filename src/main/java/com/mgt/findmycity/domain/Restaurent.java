@@ -1,9 +1,6 @@
 package com.mgt.findmycity.domain;
 
-
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,31 +14,28 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.mgt.findmycity.domain.base.BaseVO;
 
 @Entity
-@NamedQueries({
-@NamedQuery( name = "findByCategory", query = "select r from Restaurent as r "
-+ "inner join r.restaurentCategories as rc " + "inner join rc.category as c " +
-"where c.name=:name " ) })
-
+@NamedQueries({ @NamedQuery(name = "findByCategory", query = "select r from Restaurent as r "
+		+ "inner join r.restaurentCategories as rc "
+		+ "inner join rc.category as c " + "where c.name=:name ") })
 @XmlRootElement
 @Table(name = "restaurent", catalog = "findmycity", uniqueConstraints = {})
 public class Restaurent extends BaseVO implements java.io.Serializable {
 
 	private static final long serialVersionUID = 251671538736216582L;
-	private int restaurentId;
+	private int id;
 	private Photo photo;
 	private String code;
 	private String name;
 	private String description;
 	private String isActive;
-	
+	private Set<RestaurentMenu> restaurentMenus = new HashSet<RestaurentMenu>(0);
+
 	private Set<RestaurentCategory> restaurentCategories = new HashSet<RestaurentCategory>(
 			0);
 	private Set<Delivery> deliveries = new HashSet<Delivery>(0);
@@ -49,16 +43,16 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 	public Restaurent() {
 	}
 
-	public Restaurent(int restaurentId, String code, String name) {
-		this.restaurentId = restaurentId;
+	public Restaurent(int id, String code, String name) {
+		this.id = id;
 		this.code = code;
 		this.name = name;
 	}
 
-	public Restaurent(int restaurentId, Photo photo, String code, String name,
+	public Restaurent(int id, Photo photo, String code, String name,
 			String description, String isActive,
 			Set<RestaurentCategory> restaurentCategories) {
-		this.restaurentId = restaurentId;
+		this.id = id;
 		this.photo = photo;
 		this.code = code;
 		this.name = name;
@@ -67,13 +61,13 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 	}
 
 	@Id
-	@Column(name = "RESTAURENT_ID", unique = true, nullable = false, insertable = true, updatable = true)
-	public int getRestaurentId() {
-		return this.restaurentId;
+	@Column(name = "ID", unique = true, nullable = false, insertable = true, updatable = true)
+	public int getId() {
+		return this.id;
 	}
 
-	public void setRestaurentId(int restaurentId) {
-		this.restaurentId = restaurentId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@ManyToOne(cascade = {}, fetch = FetchType.LAZY)
@@ -123,7 +117,6 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 	}
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "restaurent")
-	@XmlTransient
 	public Set<RestaurentCategory> getRestaurentCategories() {
 		return this.restaurentCategories;
 	}
@@ -133,7 +126,7 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 		this.restaurentCategories = restaurentCategories;
 	}
 
-	@Transient
+	/*@Transient
 	@XmlElement
 	public List<Category> getCategory() {
 		List<Category> list = new ArrayList<Category>();
@@ -141,7 +134,7 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 			list.add(r_cat.getCategory());
 		}
 		return list;
-	}
+	}*/
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "restaurent")
 	public Set<Delivery> getDeliveries() {
@@ -151,8 +144,9 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 	public void setDeliveries(Set<Delivery> deliveries) {
 		this.deliveries = deliveries;
 	}
-	
+
 	private String deliveryFlag;
+
 	@Column(name = "DELIVERY_FLAG", unique = false, nullable = true, insertable = true, updatable = true, length = 1)
 	public String getDeliveryFlag() {
 		return this.deliveryFlag;
@@ -161,16 +155,15 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 	public void setDeliveryFlag(String deliveryFlag) {
 		this.deliveryFlag = deliveryFlag;
 	}
-	
-	private Set<MenuItem> menuItems = new HashSet<MenuItem>(0);
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "restaurent")
 	@XmlTransient
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="restaurent")
-    public Set<MenuItem> getMenuItems() {
-        return this.menuItems;
-    }
-    
-    public void setMenuItems(Set<MenuItem> menuItems) {
-        this.menuItems = menuItems;
-    }
+	public Set<RestaurentMenu> getRestaurentMenus() {
+		return this.restaurentMenus;
+	}
+
+	public void setRestaurentMenus(Set<RestaurentMenu> restaurentMenus) {
+		this.restaurentMenus = restaurentMenus;
+	}
 
 }

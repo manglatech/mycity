@@ -2,6 +2,7 @@ package com.mgt.findmycity.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,35 +13,39 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-@Table(name = "menu_item", catalog = "findmycity", uniqueConstraints = {})
-public class MenuItem implements java.io.Serializable {
+@Table(name = "menu_serving_time", catalog = "findmycity", uniqueConstraints = {})
+public class MenuServingTime implements java.io.Serializable {
 
-	private static final long serialVersionUID = 2850083519867785050L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2193488985772229779L;
+	// Fields
+
 	private int id;
 	private String name;
 	private String description;
-	private Set<MenuItemMapping> menuItemMappings = new HashSet<MenuItemMapping>(
-			0);
+	private Set<MenuType> menuTypes = new HashSet<MenuType>(0);
 
 	// Constructors
 
 	/** default constructor */
-	public MenuItem() {
+	public MenuServingTime() {
 	}
 
 	/** minimal constructor */
-	public MenuItem(int id, String name) {
+	public MenuServingTime(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
 	/** full constructor */
-	public MenuItem(int id, String name, String description,
-			Set<MenuItemMapping> menuItemMappings) {
+	public MenuServingTime(int id, String name, String description,
+			Set<MenuType> menuTypes) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.menuItemMappings = menuItemMappings;
+		this.menuTypes = menuTypes;
 	}
 
 	// Property accessors
@@ -72,14 +77,14 @@ public class MenuItem implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "menuItem")
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "menuServingTime")
 	@XmlTransient
-	public Set<MenuItemMapping> getMenuItemMappings() {
-		return this.menuItemMappings;
+	public Set<MenuType> getMenuTypes() {
+		return this.menuTypes;
 	}
 
-	public void setMenuItemMappings(Set<MenuItemMapping> menuItemMappings) {
-		this.menuItemMappings = menuItemMappings;
+	public void setMenuTypes(Set<MenuType> menuTypes) {
+		this.menuTypes = menuTypes;
 	}
 
 }

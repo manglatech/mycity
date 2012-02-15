@@ -1,5 +1,5 @@
 package com.mgt.findmycity.domain;
-// Generated Feb 10, 2012 3:23:57 PM by Hibernate Tools 3.1.0.beta4
+// Generated Feb 14, 2012 10:55:37 AM by Hibernate Tools 3.1.0.beta4
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,7 +28,7 @@ public class Restaurent  implements java.io.Serializable {
 
     // Fields    
 
-     private int restaurentId;
+     private int id;
      private Photo photo;
      private String code;
      private String name;
@@ -36,8 +36,8 @@ public class Restaurent  implements java.io.Serializable {
      private String isActive;
      private String deliveryFlag;
      private Set<RestaurentCategory> restaurentCategories = new HashSet<RestaurentCategory>(0);
+     private Set<RestaurentMenu> restaurentMenus = new HashSet<RestaurentMenu>(0);
      private Set<Delivery> deliveries = new HashSet<Delivery>(0);
-     private Set<MenuItem> menuItems = new HashSet<MenuItem>(0);
 
 
     // Constructors
@@ -47,15 +47,15 @@ public class Restaurent  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public Restaurent(int restaurentId, String code, String name) {
-        this.restaurentId = restaurentId;
+    public Restaurent(int id, String code, String name) {
+        this.id = id;
         this.code = code;
         this.name = name;
     }
     
     /** full constructor */
-    public Restaurent(int restaurentId, Photo photo, String code, String name, String description, String isActive, String deliveryFlag, Set<RestaurentCategory> restaurentCategories, Set<Delivery> deliveries, Set<MenuItem> menuItems) {
-        this.restaurentId = restaurentId;
+    public Restaurent(int id, Photo photo, String code, String name, String description, String isActive, String deliveryFlag, Set<RestaurentCategory> restaurentCategories, Set<RestaurentMenu> restaurentMenus, Set<Delivery> deliveries) {
+        this.id = id;
         this.photo = photo;
         this.code = code;
         this.name = name;
@@ -63,22 +63,22 @@ public class Restaurent  implements java.io.Serializable {
         this.isActive = isActive;
         this.deliveryFlag = deliveryFlag;
         this.restaurentCategories = restaurentCategories;
+        this.restaurentMenus = restaurentMenus;
         this.deliveries = deliveries;
-        this.menuItems = menuItems;
     }
     
 
    
     // Property accessors
     @Id
-    @Column(name="RESTAURENT_ID", unique=true, nullable=false, insertable=true, updatable=true)
+    @Column(name="ID", unique=true, nullable=false, insertable=true, updatable=true)
 
-    public int getRestaurentId() {
-        return this.restaurentId;
+    public int getId() {
+        return this.id;
     }
     
-    public void setRestaurentId(int restaurentId) {
-        this.restaurentId = restaurentId;
+    public void setId(int id) {
+        this.id = id;
     }
     @ManyToOne(cascade={},
         fetch=FetchType.LAZY)
@@ -148,21 +148,21 @@ public class Restaurent  implements java.io.Serializable {
     }
     @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="restaurent")
 
+    public Set<RestaurentMenu> getRestaurentMenus() {
+        return this.restaurentMenus;
+    }
+    
+    public void setRestaurentMenus(Set<RestaurentMenu> restaurentMenus) {
+        this.restaurentMenus = restaurentMenus;
+    }
+    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="restaurent")
+
     public Set<Delivery> getDeliveries() {
         return this.deliveries;
     }
     
     public void setDeliveries(Set<Delivery> deliveries) {
         this.deliveries = deliveries;
-    }
-    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="restaurent")
-
-    public Set<MenuItem> getMenuItems() {
-        return this.menuItems;
-    }
-    
-    public void setMenuItems(Set<MenuItem> menuItems) {
-        this.menuItems = menuItems;
     }
    
 

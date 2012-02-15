@@ -1,5 +1,5 @@
 package com.mgt.findmycity.domain;
-// Generated Feb 10, 2012 3:23:57 PM by Hibernate Tools 3.1.0.beta4
+// Generated Feb 14, 2012 10:55:37 AM by Hibernate Tools 3.1.0.beta4
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
