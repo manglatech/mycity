@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <taskdef name="instrument" classname="org.hibernate.tool.instrument.javassist.InstrumentTask">
+    <classpath>
+      <path refid="maven.dependency.classpath"/>
+      <path refid="maven.plugin.classpath"/>
+    </classpath>
+  </taskdef>
+  <instrument verbose="true">
+    <fileset dir="C:\Dhaval\Personal\Mangla Tech\workspace\BackEnd\myCityFinder\target\classes">
+      <include name="**/com.mgt.mycity/*.class"/>
+    </fileset>
+  </instrument>
+</target>
+</project>

@@ -7,17 +7,24 @@ import javax.persistence.EntityManager;
 
 public interface GenericHibernateDao<T, ID extends Serializable> {
 
-	public abstract void setEntityManager(EntityManager entityManager);
+	void setEntityManager(EntityManager entityManager);
 
-	public abstract Class<T> getPersistentClass();
+	Class<T> getPersistentClass();
 
-	public abstract T findById(ID id);
+	T findById(ID id);
 
-	public abstract List<T> findAll();
+	T doFind(T entity);
 
-	public abstract T doPersistent(T entity);
+	List<T> findAll();
 
-	public abstract void doRemove(T entity);
+	T doPersistent(T entity);
 
+	T doMerge(T entity);
+
+	void doRemove(T entity);
+
+	void doRemove(Iterable<T> entities);
+
+	T doPersistent(Iterable<T> entity);
 
 }

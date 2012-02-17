@@ -2,19 +2,19 @@ package com.mgt.findmycity.info;
 
 public class CommentsSummary {
 	
-	private Integer numberOfComments;
-	private Integer averageRatings;
+	private Long numberOfComments;
+	private Double averageRatings;
 	
-	public Integer getNumberOfComments() {
+	public Long getNumberOfComments() {
 		return numberOfComments;
 	}
-	public void setNumberOfComments(Integer numberOfComments) {
+	public void setNumberOfComments(Long numberOfComments) {
 		this.numberOfComments = numberOfComments;
 	}
-	public Integer getAverageRatings() {
+	public Double getAverageRatings() {
 		return averageRatings;
 	}
-	public void setAverageRatings(Integer averageRatings) {
+	public void setAverageRatings(Double averageRatings) {
 		this.averageRatings = averageRatings;
 	}
 	

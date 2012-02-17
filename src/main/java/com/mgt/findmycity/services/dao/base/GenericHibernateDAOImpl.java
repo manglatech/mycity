@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 public abstract class GenericHibernateDAOImpl<T, ID extends Serializable>
-		implements GenericDAO<T, ID>, GenericHibernateDao<T, ID> {
+		implements GenericHibernateDao<T, ID> {
 
 	private Class<T> persistentClass;
 	

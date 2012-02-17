@@ -27,8 +27,8 @@ public class CommentsDAOImpl extends GenericHibernateDAOImpl<Comments, Integer>
 		CommentsSummary result = null;
 		if (objs != null && objs.length > 0 && objs.length == 2) {
 			result = new CommentsSummary();
-			result.setAverageRatings((Integer) objs[0]);
-			result.setNumberOfComments((Integer) objs[1]);
+			result.setAverageRatings(((Double) objs[0]));
+			result.setNumberOfComments((Long) objs[1]);
 		}
 		return result;
 	}

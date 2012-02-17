@@ -14,10 +14,12 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.mgt.findmycity.domain.base.BaseVO;
+import com.mgt.findmycity.info.CommentsSummary;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "findByCategory", query = "select r from Restaurent as r "
@@ -39,7 +41,8 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 	private Set<RestaurentCategory> restaurentCategories = new HashSet<RestaurentCategory>(
 			0);
 	private Set<Delivery> deliveries = new HashSet<Delivery>(0);
-
+	private CommentsSummary summary;
+	
 	public Restaurent() {
 	}
 
@@ -126,16 +129,6 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 		this.restaurentCategories = restaurentCategories;
 	}
 
-	/*@Transient
-	@XmlElement
-	public List<Category> getCategory() {
-		List<Category> list = new ArrayList<Category>();
-		for (RestaurentCategory r_cat : getRestaurentCategories()) {
-			list.add(r_cat.getCategory());
-		}
-		return list;
-	}*/
-
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "restaurent")
 	public Set<Delivery> getDeliveries() {
 		return this.deliveries;
@@ -165,5 +158,13 @@ public class Restaurent extends BaseVO implements java.io.Serializable {
 	public void setRestaurentMenus(Set<RestaurentMenu> restaurentMenus) {
 		this.restaurentMenus = restaurentMenus;
 	}
+	@Transient
+	public CommentsSummary getSummary() {
+		return summary;
+	}
+	public void setSummary(CommentsSummary summary) {
+		this.summary = summary;
+	}
+	
 
 }

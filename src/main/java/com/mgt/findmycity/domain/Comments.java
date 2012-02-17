@@ -9,7 +9,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @NamedQueries({ @NamedQuery(name = "findAverageUserRatings", 
-				query = "select AVG(c.ratings) as averageRatings, count(c.*) as numberOfComments from Comments c " +
+				query = "select AVG(c.ratings) as averageRatings, count(c.ratings) as numberOfComments from Comments c " +
 						"where c.entityId=:entityId and c.entityTypeId=:entityTypeId ") })
 @Entity
 @Table(name = "comments", catalog = "findmycity", uniqueConstraints = {})
